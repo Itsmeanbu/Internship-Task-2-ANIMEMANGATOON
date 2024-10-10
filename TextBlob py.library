@@ -1,0 +1,43 @@
+from textblob import TextBlob
+
+# Sample dataset of comments
+comments = [
+    "Manga is so much better than manhwa in terms of storytelling!",
+    "I love both manga and manhwa! They each have their own unique charm.",
+    "Manga is overrated, manhwa has much better art.",
+    "Manga has been my favorite for years, but manhwa is catching up quickly.",
+    "I don’t like manhwa, the characters feel flat compared to manga.",
+    "Manhwa brings fresh perspectives that I think manga lacks.",
+    "Manga’s storytelling is unbeatable, but manhwa is improving too.",
+    "Manhwa is way too slow, but I still enjoy some titles.",
+    "I like manhwa, but manga will always be my go-to.",
+    "Both have their strengths and weaknesses, but I prefer manga overall."
+]
+
+# Initialize counters
+positive_comments = 0
+negative_comments = 0
+neutral_comments = 0
+
+# Step through each comment, analyze sentiment
+for comment in comments:
+    blob = TextBlob(comment)
+    sentiment_score = blob.sentiment.polarity  # Polarity ranges from -1 (negative) to 1 (positive)
+    
+    if sentiment_score > 0:
+        positive_comments += 1
+    elif sentiment_score < 0:
+        negative_comments += 1
+    else:
+        neutral_comments += 1
+
+# Calculate percentages
+total_comments = len(comments)
+positive_percentage = (positive_comments / total_comments) * 100
+negative_percentage = (negative_comments / total_comments) * 100
+neutral_percentage = (neutral_comments / total_comments) * 100
+
+# Print results
+print(f"Positive comments: {positive_percentage:.2f}%")
+print(f"Negative comments: {negative_percentage:.2f}%")
+print(f"Neutral comments: {neutral_percentage:.2f}%")
